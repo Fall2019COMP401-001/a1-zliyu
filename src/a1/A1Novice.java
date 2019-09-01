@@ -14,7 +14,6 @@ public class A1Novice {
 		
 		//Store the names of customers
 		String[] names = new String[num];
-		
 		//Store the money each customer spends
 		String[] money = new String[num];
 		
@@ -22,14 +21,11 @@ public class A1Novice {
 		//Loop i times
 		for (int i = 0; i < num; i++) {
 			
-			//Get first name
+			//Get first and last name
 			String first = scan.next();
-			//Get lash name
 			String last = scan.next();
-			//Add name to array
-			names[i] = getName(first, last);
-			
-			
+			names[i] = first.charAt(0) + ". " + last;
+				
 			//Get the number of different items bought
 			int items = scan.nextInt();
 			
@@ -39,18 +35,17 @@ public class A1Novice {
 			
 			//Calculate total money this customer spends
 			for (int j = 0; j < items; j++) {
-				//The amount of this item
 				int amount = scan.nextInt();
+				
 				//Skip item name
 				scan.next();
-				//The individual price of this item
+
 				double price = scan.nextDouble();
-				//Add
-				total = total + amount * price;				
+				total += amount * price; //NOT '=+'
 			}
-			//Add to array
-			//Convert to correct format
-			money[i] = money[i] + String.format("%.2f", total);
+			
+			//Convert to correct format and add to array
+			money[i] = money[i] + String.format("%.2f", total); //?
 			//Print out results
 			System.out.println(names[i] + ": " + money[i]);
 		}
@@ -58,12 +53,5 @@ public class A1Novice {
 		//End scanner
 		scan.close();
 				
-	}
-	
-	//Convert names to correct format
-	public static String getName(String str1, String str2) {
-		String str = str1.charAt(0) + ". " + str2;
-		return str;
-	}
-		
+	}		
 }
