@@ -16,6 +16,9 @@ public class A1Jedi {
 		int[] item_c = new int[num_s];
 		int[] item_num = new int[num_s];
 		
+		//Later used to test whether a customer has already bought same item
+		int[] test = item_c.clone();
+		
 		//Read stored item info
 		for (int i = 0; i < num_s; i++) {
 			item_names[i] = scan.next();	
@@ -39,11 +42,22 @@ public class A1Jedi {
 			//Loop through each item the customer buys
 			for (int j = 0; j < num_i; j++) {
 				int amount = scan.nextInt();
+				
+				//Get the index of item bought
 				int item_index = getIndex(scan.next(), item_names);
-				item_c[item_index] ++;
+				
+				//Add to item_c only if this customer hasn't bought the same item
+				if (item_c[item_index] == test[item_index])
+					item_c[item_index] ++;
+				
+				//Add to total number of this item all customer by
 				item_num[item_index] += amount;
 			}
+			
+			//Update test
+			test = item_c.clone();
 		}
+		
 		
 		//Output results
 		//Loop through all items
@@ -60,6 +74,7 @@ public class A1Jedi {
 		
 		scan.close();
 	}
+	
 	//Precondition: the item the customers buy must be in store
 	public static int getIndex(String str, String[] strs) {
 		int index = 0;
